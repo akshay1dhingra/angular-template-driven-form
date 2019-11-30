@@ -1,9 +1,13 @@
-<form>
+<form #f=ngForm (ngSubmit)="submit(f)">
     <div class="form-group">
         <label for="firstName" [ngStyle]="myStyles">First Name</label>
-        <input required ngModel name="firstName" #firstNamee="ngModel" (change)="log(firstNamee)" id="firstName" type="text"
-            class="form-control">
-        <div class="alert alert-danger" *ngIf="firstNamee.touched && !firstNamee.valid">First Name is required.</div>
+        <input required minlength="3" maxlength="10" pattern="" ngModel name="firstNa" #firstNamee="ngModel" (change)="log(firstNamee)"
+            id="firstName" type="text" class="form-control">
+        <div class="alert alert-danger" *ngIf="firstNamee.touched && !firstNamee.valid">
+            <div *ngIf="firstNamee.errors.required">First Name is required.</div>
+            <div *ngIf="firstNamee.errors.minlength">First Name should be minimum 3 characters.</div>
+            <div *ngIf="firstNamee.errors.maxlength">First Name should be maximum 10 characters.</div>
+        </div>
     </div>
     <div class="form-group">
         <label for="comment" [ngStyle]="myStyles">
@@ -14,5 +18,7 @@
         </textarea>
         <div class="alert alert-danger" *ngIf="commentt.touched && !commentt.valid">Comment is required.</div>
     </div>
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-danger" (click)="f.reset()">Reset</button>
+    <span>{{' '}}</span>
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>

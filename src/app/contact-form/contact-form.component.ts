@@ -6,10 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-form.component.css']
 })
 export class ContactFormComponent {
+  dropdownOptions = [
+    { id: 1, category: 'one' },
+    { id: 2, category: 'two' },
+    { id: 3, category: 'three' }
+  ];
+
   myStyles = {
     'font-weight': 'bold'
+  };
+
+  log(x) { console.log(x); }
+
+  submit(f) {
+    console.log(f);
   }
 
-  log(x) { console.log(x) };
+  reset() {
+    console.log("reset worked")
+  }
 
 }
